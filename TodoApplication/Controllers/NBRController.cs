@@ -13,17 +13,17 @@ namespace TodoApplication.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<NBR> nbr = new List<NBR>();
+            NBR nbr = new NBR();
 
             using (var httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = new Uri(BaseUrl);
                 httpClient.DefaultRequestHeaders.Clear();
-                HttpResponseMessage response = await httpClient.GetAsync("api/NBR/Get/rates");
+                HttpResponseMessage response = await httpClient.GetAsync("rates?per_page=100&page=1&from=2022-05-17&to=2022-05-17");
                 if (response.IsSuccessStatusCode)
                 {
                     var nbrResponse = await response.Content.ReadAsStringAsync();
-                    nbr = JsonConvert.DeserializeObject<List<NBR>>(nbrResponse);
+                    nbr = JsonConvert.DeserializeObject<NBR>(nbrResponse);
                 }
                 return Ok(nbr);
             }

@@ -260,3 +260,4 @@ C:\Users\DELL\Downloads\TodoApplication\TodoApplication\obj\Debug\net6.0\TodoApp
 C:\Users\DELL\Downloads\TodoApplication\TodoApplication\obj\Debug\net6.0\ref\TodoApplication.dll
 C:\Users\DELL\Downloads\TodoApplication\TodoApplication\obj\Debug\net6.0\TodoApplication.pdb
 C:\Users\DELL\Downloads\TodoApplication\TodoApplication\obj\Debug\net6.0\TodoApplication.genruntimeconfig.cache
+C:\Users\DELL\Downloads\TodoApplication\TodoApplication\obj\Debug\net6.0\TodoApplication.csproj.AssemblyReference.cache
