@@ -9,7 +9,7 @@ namespace TodoApplication.Controllers
     [ApiController]
     public class NBRController : ControllerBase
     {
-        string BaseUrl = "https://www.nrb.org.np/api/forex/v1/";
+        //string BaseUrl = "https://www.nrb.org.np/api/forex/v1/";
 
         public async Task<IActionResult> Index()
         {
@@ -17,7 +17,7 @@ namespace TodoApplication.Controllers
 
             using (var httpClient = new HttpClient())
             {
-                httpClient.BaseAddress = new Uri(BaseUrl);
+                httpClient.BaseAddress = new Uri("https://www.nrb.org.np/api/forex/v1/");
                 httpClient.DefaultRequestHeaders.Clear();
                 HttpResponseMessage response = await httpClient.GetAsync("rates?per_page=100&page=1&from=2022-05-17&to=2022-05-17");
                 if (response.IsSuccessStatusCode)
