@@ -2,13 +2,19 @@
 
 namespace ConsoleApp1
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var client = new RestClient("https://www.nrb.org.np/api/forex/v1/");
+            //var client = new RestClient("https://www.machbank.com/page/filter_branch/");
+            //var client = new RestClient("https://jsonplaceholder.typicode.com/posts/1");
+
             var request = new RestRequest("rates?per_page=100&page=1&from=2022-05-17&to=2022-05-17");
-            var response = client.GetAsync(request).Result;       
+            //var request = new RestRequest();
+
+            var response = client.GetAsync(request).Result; 
+            
             Console.WriteLine(response.Content);
 
             Console.Read();
