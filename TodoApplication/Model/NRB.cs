@@ -68,7 +68,7 @@
         public Links links { get; set; }
 
     }
-    public class NBR
+    public class NRB
     {
         public Status status { get; set; }
         public Errors errors { get; set; }
