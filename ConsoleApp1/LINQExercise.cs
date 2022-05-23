@@ -17,7 +17,7 @@ namespace ConsoleApp1
                 new Student() { StudentID = 2, StudentName = "Moin",  Age = 21 } ,
                 new Student() { StudentID = 3, StudentName = "Bill",  Age = 18 } ,
                 new Student() { StudentID = 4, StudentName = "Ram" , Age = 20} ,
-                new Student() { StudentID = 5, StudentName = "Ron" , Age = 15 }
+                new Student() { StudentID = 5, StudentName = "Ron" , Age = 20 }
             };
 
             // LINQ Query Syntax to find out teenager students
@@ -29,6 +29,22 @@ namespace ConsoleApp1
             foreach (Student std in teenAgerStudent)
             {
                 Console.WriteLine(std.StudentName);
+            }
+
+
+            Console.WriteLine("-----* GroupBy *-----");
+            //LINQ Query syntax for GroupBy
+            var groupedResult = from s in studentList
+                                group s by s.Age;
+            //var groupedResult = studentList.GroupBy(s => s.Age);
+            //iterate each group
+            foreach (var ageGroup in groupedResult)
+            {
+                Console.WriteLine("Age Group: {0}", ageGroup.Key);
+                foreach (Student s in ageGroup)
+                {
+                    Console.WriteLine("Student Name: {0}", s.StudentName);
+                }
             }
         }
 
@@ -71,10 +87,10 @@ namespace ConsoleApp1
         {
             IList<Person> personList = new List<Person>()
             {
-                new Person() { Id = 1, Name = "Jack", Email = "jack@gmail.com", Address = "kathamandu" },
-                new Person() { Id = 2, Name = "Rose", Email = "rose.red@hotmail.com", Address = "Pokhara" },
-                new Person() { Id = 3, Name = "Alice", Email = "alice@yahoo.com", Address = "Patan" },
-                new Person() { Id = 4, Name = "Bob", Email = "bob@gmail.com", Address = "Bhaktapur" }
+                new Person() { PersonID = 1, Name = "Jack", Email = "jack@gmail.com", Address = "kathamandu" },
+                new Person() { PersonID = 2, Name = "Rose", Email = "rose.red@hotmail.com", Address = "Pokhara" },
+                new Person() { PersonID = 3, Name = "Alice", Email = "alice@yahoo.com", Address = "Patan" },
+                new Person() { PersonID = 4, Name = "Bob", Email = "bob@gmail.com", Address = "Bhaktapur" }
             };
             var orderByAsc = from p in personList
                              orderby p.Name //Sorts the studentList collection in ascending order
@@ -105,14 +121,15 @@ namespace ConsoleApp1
             }
         }
 
+
         public void GetPersonThenBy()
         {
             IList<Person> personList = new List<Person>()
             {
-                new Person() { Id = 1, Name = "Jack", Email = "jack@gmail.com", Address = "kathamandu" },
-                new Person() { Id = 2, Name = "Rose", Email = "rose.red@hotmail.com", Address = "Pokhara" },
-                new Person() { Id = 3, Name = "Alice", Email = "alice@yahoo.com", Address = "Patan" },
-                new Person() { Id = 4, Name = "Bob", Email = "bob@gmail.com", Address = "Bhaktapur" }
+                new Person() { PersonID = 1, Name = "Jack", Email = "jack@gmail.com", Address = "kathamandu" },
+                new Person() { PersonID = 2, Name = "Rose", Email = "rose.red@hotmail.com", Address = "Pokhara" },
+                new Person() { PersonID = 3, Name = "Alice", Email = "alice@yahoo.com", Address = "Patan" },
+                new Person() { PersonID = 4, Name = "Bob", Email = "bob@gmail.com", Address = "Bhaktapur" }
             };
             var thenByResult = personList.OrderBy(p => p.Name).ThenBy(p => p.Address);
 
@@ -131,5 +148,154 @@ namespace ConsoleApp1
             }
         }
 
+
+        //join examples
+        public void GetStudents()
+        {
+            // Student collection
+            IList<Student> studentList = new List<Student>() {
+                new Student() { StudentID = 1, StudentName = "John", Age = 18, PersonID = 1 } ,
+                new Student() { StudentID = 2, StudentName = "Steve",  Age = 21, PersonID = 2 } ,
+                new Student() { StudentID = 3, StudentName = "Bill",  Age = 18, PersonID = 3 } ,
+                new Student() { StudentID = 4, StudentName = "Ram" , Age = 20, PersonID = 4 } ,
+                new Student() { StudentID = 5, StudentName = "Ron" , Age = 21 }
+            };
+
+            //Person Collection
+            IList<Person> personList = new List<Person>()
+            {
+                new Person() { PersonID = 1, Name = "Jack", Email = "jack@gmail.com", Address = "kathamandu" },
+                new Person() { PersonID = 2, Name = "Rose", Email = "rose.red@hotmail.com", Address = "Pokhara" },
+                new Person() { PersonID = 3, Name = "Alice", Email = "alice@yahoo.com", Address = "Patan" },
+                new Person() { PersonID = 4, Name = "Bob", Email = "bob@gmail.com", Address = "Bhaktapur" }
+            };
+            /*var innerJoinResult = studentList.Join(
+                                    personList,
+                                    student => student.PersonID,
+                                    person => person.PersonID,
+                                    (student, person) => new
+                                    {
+                                        StudentName = student.StudentName,
+                                        Age = student.Age,
+                                        Name = person.Name,
+                                        Email = person.Email,
+                                        Address = person.Address
+                                    });*/
+            var innerJoinResult = from student in studentList
+                                  join person in personList
+                                  on student.PersonID equals person.PersonID
+                                  select new
+                                  {
+                                      StudentName = student.StudentName,
+                                      Age = student.Age,
+                                      Name = person.Name,
+                                      Email = person.Email,
+                                      Address = person.Address
+                                  };
+            foreach (var student in innerJoinResult)
+            {
+                Console.WriteLine(" {0}, {1}, {2}, {3}. {4}", student.StudentName, student.Age, student.Name, student.Email, student.Address);
+            }
+
+
+            //group join
+            /*var groupJoin = personList.GroupJoin(studentList,
+                                            person => person.PersonID,
+                                            student => student.PersonID,
+                                            (person, studentsGroup) => new
+                                            {
+                                                Students = studentsGroup,
+                                                PersonFullName = person.Name
+                                            });*/
+            var groupJoin = from person in personList
+                            join student in studentList
+                            on person.PersonID equals student.PersonID
+                            into studentGroup
+                            select new
+                            {
+                                Students = studentGroup,
+                                PersonFullName = person.Name
+                            };
+            foreach(var item in groupJoin)
+            {
+                Console.WriteLine(item.PersonFullName);
+                foreach (var student in item.Students)
+                {
+                    Console.WriteLine(student.StudentName);
+                }
+            }
+        }
+
+
+        public void GetPersonName()
+        {
+            //Person Collection
+            IList<Person> personList = new List<Person>()
+            {
+                new Person() { PersonID = 1, Name = "Jack", Email = "jack@gmail.com", Address = "kathamandu" },
+                new Person() { PersonID = 2, Name = "Rose", Email = "rose.red@hotmail.com", Address = "Pokhara" },
+                new Person() { PersonID = 3, Name = "Alice", Email = "alice@yahoo.com", Address = "Patan" },
+                new Person() { PersonID = 4, Name = "Bob", Email = "bob@gmail.com", Address = "Bhaktapur" }
+            };
+            /*var selectResult = from person in personList
+                               select (person.Name, person.Email, person.Address);*/
+            var selectResult = personList.Select(person => new 
+                                                        { 
+                                                            Name = person.Name, 
+                                                            Email = person.Email,
+                                                            Address = person.Address
+                                                        });
+            Console.WriteLine("-----* select *-----");
+            foreach(var name in selectResult)
+            {
+                Console.WriteLine(name);
+            }
+        }
+
+
+        //use of First and FirstOrDefault
+        public void UseFirstAndLastQuery()
+        {
+            IList<int> intList = new List<int>() { 7, 10, 21, 30, 45, 50, 87};
+            IList<string> stringList = new List<string>() { "one", null, "two", "five", "ten" };
+            IList<string> emptyList = new List<string>();
+            IList<int> oneElementList = new List<int>() { 7 };
+
+            Console.WriteLine("1st element in intList: {0}", intList.First());
+            Console.WriteLine("1st element in intList: {0}", intList.First(i => i % 2 == 0));
+            Console.WriteLine("1st element in stringList: {0}", stringList.First());
+            //Console.WriteLine("1st element in emptyList: {0}", emptyList.First());
+
+            Console.WriteLine("1st element in intList: {0}", intList.FirstOrDefault());
+            Console.WriteLine("1st element in intList: {0}", intList.FirstOrDefault(i => i % 2 == 0));
+            Console.WriteLine("1st element in stringList: {0}", stringList.FirstOrDefault());
+            Console.WriteLine("1st element in emptyList: {0}", emptyList.FirstOrDefault());
+
+            Console.WriteLine("Last element in intList: {0}", intList.Last());
+            Console.WriteLine("Last element in intList: {0}", intList.Last(i => i % 2 == 0));
+            Console.WriteLine("Last element in stringList: {0}", stringList.Last());
+            //Console.WriteLine("Last element in emptyList: {0}", emptyList.Last());
+
+            Console.WriteLine("Last element in intList: {0}", intList.LastOrDefault());
+            Console.WriteLine("Last element in intList: {0}", intList.LastOrDefault(i => i % 2 == 0));
+            Console.WriteLine("Last element in stringList: {0}", stringList.LastOrDefault());
+            Console.WriteLine("Last element in emptyList: {0}", emptyList.LastOrDefault());
+
+            Console.WriteLine("One Element in oneElementList: {0}", oneElementList.Single());
+            Console.WriteLine("One Element in oneElementList: {0}", oneElementList.SingleOrDefault());
+        }
+
+
+        public void GetDistinct()
+        {
+            IList<string> stringList = new List<string>() { "one", "two", "three", "one", "two"};
+            /*var distinctList = from list in stringList
+                               select list Distinct;*/
+            var distinctList = stringList.Distinct();
+            foreach (var distinct in distinctList)
+            {
+                Console.WriteLine(distinct);
+            }
+        }
     }
 }

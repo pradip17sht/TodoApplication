@@ -5,6 +5,7 @@ C:\Users\DELL\Downloads\TodoApplication\ConsoleApp1\bin\Debug\net6.0\ConsoleApp1
 C:\Users\DELL\Downloads\TodoApplication\ConsoleApp1\bin\Debug\net6.0\ref\ConsoleApp1.dll
 C:\Users\DELL\Downloads\TodoApplication\ConsoleApp1\bin\Debug\net6.0\ConsoleApp1.pdb
 C:\Users\DELL\Downloads\TodoApplication\ConsoleApp1\bin\Debug\net6.0\RestSharp.dll
+C:\Users\DELL\Downloads\TodoApplication\ConsoleApp1\obj\Debug\net6.0\ConsoleApp1.csproj.AssemblyReference.cache
 C:\Users\DELL\Downloads\TodoApplication\ConsoleApp1\obj\Debug\net6.0\ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\DELL\Downloads\TodoApplication\ConsoleApp1\obj\Debug\net6.0\ConsoleApp1.AssemblyInfoInputs.cache
 C:\Users\DELL\Downloads\TodoApplication\ConsoleApp1\obj\Debug\net6.0\ConsoleApp1.AssemblyInfo.cs

@@ -17,10 +17,14 @@ namespace ConsoleApp1
             //RestSharpExercise.GetUsers();
 
             LINQExercise objLINQExercise = new LINQExercise();
-            objLINQExercise.GetTeenAgeStudents();
-            objLINQExercise.GetOfType();
-            objLINQExercise.GetPersonWithOrderBy();
-            objLINQExercise.GetPersonThenBy();
+            //objLINQExercise.GetTeenAgeStudents();
+            //objLINQExercise.GetOfType();
+            //objLINQExercise.GetPersonWithOrderBy();
+            //objLINQExercise.GetPersonThenBy();
+            objLINQExercise.GetStudents();
+            objLINQExercise.GetPersonName();
+            objLINQExercise.UseFirstAndLastQuery();
+            objLINQExercise.GetDistinct();
 
             Console.Read();
         }
