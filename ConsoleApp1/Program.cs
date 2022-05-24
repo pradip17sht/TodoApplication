@@ -25,6 +25,7 @@ namespace ConsoleApp1
             objLINQExercise.GetPersonName();
             objLINQExercise.UseFirstAndLastQuery();
             objLINQExercise.GetDistinct();
+            objLINQExercise.GetGenericDictionary();
 
             Console.Read();
         }

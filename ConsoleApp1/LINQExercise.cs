@@ -283,18 +283,66 @@ namespace ConsoleApp1
 
             Console.WriteLine("One Element in oneElementList: {0}", oneElementList.Single());
             Console.WriteLine("One Element in oneElementList: {0}", oneElementList.SingleOrDefault());
+
+            //concatenation operator use
+            var result = intList.Concat(oneElementList);
+            foreach (var item in result)
+                Console.WriteLine(item);
         }
 
 
         public void GetDistinct()
         {
             IList<string> stringList = new List<string>() { "one", "two", "three", "one", "two"};
-            /*var distinctList = from list in stringList
-                               select list Distinct;*/
-            var distinctList = stringList.Distinct();
+            var distinctList = (from list in stringList
+                               select list).Distinct();
+            //var distinctList = stringList.Distinct();
             foreach (var distinct in distinctList)
             {
                 Console.WriteLine(distinct);
+            }
+        }
+
+        
+        //Converts a Generic list to a generic dictionary
+        public void GetGenericDictionary()
+        {
+            // Student collection
+            IList<Student> studentList = new List<Student>() {
+                new Student() { StudentID = 1, StudentName = "John", Age = 18 } ,
+                new Student() { StudentID = 2, StudentName = "Steve", Age = 21 } ,
+                new Student() { StudentID = 3, StudentName = "Bill", Age = 18 } ,
+                new Student() { StudentID = 4, StudentName = "Ram" , Age = 20 } ,
+                new Student() { StudentID = 5, StudentName = "Ron" , Age = 21 }
+            };
+
+            //following converts list into Dictionary where studentId is a key
+            IDictionary<int, Student> stdDictionary = studentList.ToDictionary<Student, int>(s => s.StudentID);
+            foreach (var key in stdDictionary.Keys)
+            {
+                Console.WriteLine("Key: {0}, Value: {1}", key, (stdDictionary[key] as Student).StudentName);
+            }
+
+
+            //use let in query 
+            var lowerCaseStudentNames = from student in studentList 
+                                        let lowerCaseStudenName = student.StudentName.ToLower()
+                                        where lowerCaseStudenName.StartsWith("s")
+                                        select lowerCaseStudenName;
+            foreach (var name in lowerCaseStudentNames)
+            {
+                Console.WriteLine(name);
+            }
+
+            //immediate execution
+            IList<Student> teenAgerStudents =
+                studentList.Where(s => s.Age > 12 && s.Age < 20).ToList();
+            /*IList<Student> teenAgerStudents = (from s in studentList
+                                               where s.Age > 12 && s.Age < 20
+                                               select s).ToList();*/
+            foreach (var student in teenAgerStudents)
+            {
+                Console.WriteLine(student.StudentName);
             }
         }
     }
