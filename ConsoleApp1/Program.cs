@@ -21,11 +21,11 @@ namespace ConsoleApp1
             //objLINQExercise.GetOfType();
             //objLINQExercise.GetPersonWithOrderBy();
             //objLINQExercise.GetPersonThenBy();
-            objLINQExercise.GetStudents();
+            //objLINQExercise.GetStudents();
             objLINQExercise.GetPersonName();
-            objLINQExercise.UseFirstAndLastQuery();
-            objLINQExercise.GetDistinct();
-            objLINQExercise.GetGenericDictionary();
+            //objLINQExercise.UseFirstAndLastQuery();
+            //objLINQExercise.GetDistinct();
+            //objLINQExercise.GetGenericDictionary();
 
             Console.Read();
         }

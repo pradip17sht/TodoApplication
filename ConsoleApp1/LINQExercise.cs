@@ -230,7 +230,7 @@ namespace ConsoleApp1
         public void GetPersonName()
         {
             //Person Collection
-            IList<Person> personList = new List<Person>()
+            List<Person> personList = new List<Person>()
             {
                 new Person() { PersonID = 1, Name = "Jack", Email = "jack@gmail.com", Address = "kathamandu" },
                 new Person() { PersonID = 2, Name = "Rose", Email = "rose.red@hotmail.com", Address = "Pokhara" },
@@ -249,6 +249,26 @@ namespace ConsoleApp1
             foreach(var name in selectResult)
             {
                 Console.WriteLine(name);
+            }
+
+
+            // IEnumerable query use
+            IEnumerable<Person> query = from person in personList
+                                        where person.PersonID == 1
+                                        select person;
+            foreach (var person in query)
+            {
+                Console.WriteLine("Id = " + person.PersonID + " Name = " + person.Name
+                    + " Email = " + person.Email + " Address = " + person.Address);
+            }
+
+
+            //IQueryable query use
+            IQueryable<Person> que = personList.AsQueryable().Where(x => x.PersonID == 2);
+            foreach (var person in que)
+            {
+                Console.WriteLine("Id = " + person.PersonID + " Name = " + person.Name
+                    + " Email = " + person.Email + " Address = " + person.Address);
             }
         }
 
