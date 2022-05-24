@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TodoApplication.Model;
 
 namespace ConsoleApp1
 {
@@ -270,6 +271,22 @@ namespace ConsoleApp1
                 Console.WriteLine("Id = " + person.PersonID + " Name = " + person.Name
                     + " Email = " + person.Email + " Address = " + person.Address);
             }
+
+            /*TodoDBContext db = new TodoDBContext();
+            IEnumerable<Student> students = db.Student.Where(x => x.StudentName == "Rose");
+            students = students.Take(2).ToList();
+            foreach (var student in students)
+            {
+                Console.WriteLine(student.StudentName + " " + student.Age);
+            }*/
+
+            /*TodoDBContext db = new TodoDBContext(); 
+            IQueryable<Student> listStudents = db.Student.AsQueryable().Where(x => x.StudentName == "Rose");
+            students = students.Take(2).ToList();
+            foreach (var student in students)
+            {
+                Console.WriteLine(student.StudentName + " " + student.Age);
+            }*/
         }
 
 
