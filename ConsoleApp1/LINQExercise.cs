@@ -272,13 +272,17 @@ namespace ConsoleApp1
                     + " Email = " + person.Email + " Address = " + person.Address);
             }
 
-            /*TodoDBContext db = new TodoDBContext();
-            IEnumerable<Student> students = db.Student.Where(x => x.StudentName == "Rose");
-            students = students.Take(2).ToList();
+            TodoDBContext dbContext = new TodoDBContext();
+            var students = dbContext.Student.AsEnumerable()
+                                            .Where(x => x.StudentName == "Bill")
+                                            //.OrderByDescending(x => x.Age)
+                                            .Take(2);
+            //IEnumerable<Student> students = dbContext.Student.Where(x => x.StudentName == "Rose");
+            //students = students.Take(2).ToList();
             foreach (var student in students)
             {
                 Console.WriteLine(student.StudentName + " " + student.Age);
-            }*/
+            }
 
             /*TodoDBContext db = new TodoDBContext(); 
             IQueryable<Student> listStudents = db.Student.AsQueryable().Where(x => x.StudentName == "Rose");

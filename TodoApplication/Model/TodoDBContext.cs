@@ -15,5 +15,18 @@ namespace TodoApplication.Model
         }
         public DbSet<Todo> Todo { get; set; }
         public DbSet<Student> Student { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            IConfigurationRoot config = builder.Build();
+            optionsBuilder.UseSqlServer(config.GetConnectionString("MyDbConnection"));
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
