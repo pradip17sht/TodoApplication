@@ -28,6 +28,7 @@ namespace ConsoleApp1
             //objLINQExercise.GetGenericDictionary();
 
             Console.Read();
+            Console.ReadKey();
         }
         
     }
