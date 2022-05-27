@@ -275,22 +275,23 @@ namespace ConsoleApp1
             TodoDBContext dbContext = new TodoDBContext();
             var students = dbContext.Student.AsEnumerable()
                                             .Where(x => x.StudentName == "Bill")
-                                            //.OrderByDescending(x => x.Age)
                                             .Take(2);
-            //IEnumerable<Student> students = dbContext.Student.Where(x => x.StudentName == "Rose");
-            //students = students.Take(2).ToList();
             foreach (var student in students)
             {
                 Console.WriteLine(student.StudentName + " " + student.Age);
             }
 
-            /*TodoDBContext db = new TodoDBContext(); 
-            IQueryable<Student> listStudents = db.Student.AsQueryable().Where(x => x.StudentName == "Rose");
-            students = students.Take(2).ToList();
-            foreach (var student in students)
+            TodoDBContext db = new TodoDBContext();
+            var std = db.Student.AsQueryable()
+                                            .Where(x => x.StudentName == "Ron")
+                                            .OrderByDescending(x => x.Age)
+                                            .Take(2).ToList();
+            /*IQueryable<Student> listStudents = db.Student.AsQueryable().Where(x => x.StudentName == "Bill");
+            students = students.Take(2).ToList();*/
+            foreach (var student in std)
             {
                 Console.WriteLine(student.StudentName + " " + student.Age);
-            }*/
+            }
         }
 
 
