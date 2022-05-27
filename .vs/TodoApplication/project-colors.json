@@ -20,7 +20,17 @@
       "ProjectGuid": "54b59e44-e734-4450-885e-603f5e996ddc",
       "DisplayName": "ConsoleApp2",
       "ColorIndex": 2
+    },
+    "7cc52b1e-9cd8-4b41-9b72-65a9ccc06925": {
+      "ProjectGuid": "7cc52b1e-9cd8-4b41-9b72-65a9ccc06925",
+      "DisplayName": "EFProject",
+      "ColorIndex": 3
+    },
+    "74d6cd91-e123-44b3-8190-704e21f5c23f": {
+      "ProjectGuid": "74d6cd91-e123-44b3-8190-704e21f5c23f",
+      "DisplayName": "EFProject",
+      "ColorIndex": 4
     }
   },
-  "NextColorIndex": 3
+  "NextColorIndex": 5
 }
